@@ -3,7 +3,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack'
 
 import Cadastro from './cadastro';
-import Login from './login';
+import Login from './pages/login';
 
 export const SignOutRoutes = createAppContainer(
     createStackNavigator({

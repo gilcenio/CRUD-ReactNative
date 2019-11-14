@@ -34,7 +34,8 @@ target 'CRUD' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+
+
 
   target 'CRUDTests' do
     inherit! :search_paths
