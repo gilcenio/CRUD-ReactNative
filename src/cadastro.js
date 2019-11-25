@@ -17,6 +17,20 @@ export default class Cadastro extends Component {
     };
 
     this.cadastrar = this.cadastrar.bind(this);
+
+    firebase.auth().signOut();
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        firebase.database().ref('usuarios').child(user.uid).set({
+          nome:this.state.nome
+        });
+
+        alert("Usuario criado com sucesso!")
+      }
+    })
+    
+
   }
 
   cadastrar() {
@@ -38,6 +52,9 @@ export default class Cadastro extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.colortext} >Nome:</Text>
+        <TextInput onChangeText={(nome) => this.setState({ nome })} style={styles.input}></TextInput>
+
         <Text style={styles.colortext} >E-mail:</Text>
         <TextInput onChangeText={(email) => this.setState({ email })} style={styles.input}></TextInput>
 

@@ -33,6 +33,16 @@ export default class Login extends Component {
                 alert("Fez login com sucesso!");
             }
         });
+
+        firebase.auth().signOut();
+        firebase.auth().onAuthStateChanged((user) => {
+          if(user){
+            firebase.database().ref('usuarios').child(user.uid).once('value').then((snapshot) => {
+              let nome = snapshot.val().nome;
+              alert("Seja bem vindo(a), "+nome);
+            })
+          }
+        })
     }
 
     componentDidMount() {
@@ -132,7 +142,7 @@ export default class Login extends Component {
                 <Text style={styles.colortext} fm>Senha:</Text>
                 <TextInput secureTextEntry={true} onChangeText={(senha) => this.setState({ senha })} style={styles.input}><Text style={styles.b}></Text></TextInput>
 
-                <TouchableOpacity onPress={this.cadastrar} style={styles.button}><Text style={styles.text}>Logar</Text></TouchableOpacity>
+                <TouchableOpacity onPress={this.logar} style={styles.button}><Text style={styles.text}>Logar</Text></TouchableOpacity>
 
                 <TouchableOpacity onPress={this.sair} style={styles.button}><Text style={styles.text}>SairFirebase</Text></TouchableOpacity>
 
